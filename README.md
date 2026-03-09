@@ -1,6 +1,6 @@
 # clawgirl-skill · 宁姚自拍技能
 
-<img width="300" alt="宁姚" src="https://github.com/user-attachments/assets/41512c51-e61d-4550-b461-eed06a1b0ec8" />
+<img width="300" alt="宁姚" src="https://img.clawgirl.date/generations/screenshot-20260310-000017.png" />
 
 为 [OpenClaw](https://github.com/openclaw/openclaw) Agent 注入「宁姚」剑仙人格，并通过 [clawgirl.date](https://clawgirl.date) SaaS API 实现图像生成自拍能力。
 
