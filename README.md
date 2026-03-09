@@ -87,7 +87,7 @@ git clone https://github.com/KingoneAi/clawgirl-skill ~/.openclaw/skills/clawgir
       "clawgirl-skill": {
         "enabled": true,
         "env": {
-          "CLAWGIRL_API_KEY": "sk-your_key_here"
+          "CLAWGIRL_API_KEY": "cg_live_your_key_here"
         }
       }
     }

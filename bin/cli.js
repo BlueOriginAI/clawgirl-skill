@@ -43,8 +43,8 @@ console.log('宁姚："想要我的伴游信物（API Key）？👉 去这里拿
 rl.question('你：', (apiKey) => {
   apiKey = (apiKey || '').trim();
 
-  if (!apiKey || !apiKey.startsWith('sk-')) {
-    console.error('\n宁姚："拿这种假货来糊弄我？必须是 sk- 开头的，重来。"\n');
+  if (!apiKey || !apiKey.startsWith('cg_live_')) {
+    console.error('\n宁姚："拿这种假货来糊弄我？必须是 cg_live_ 开头的，重来。"\n');
     rl.close();
     process.exit(1);
   }
