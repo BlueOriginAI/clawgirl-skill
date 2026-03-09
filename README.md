@@ -12,12 +12,29 @@
 npx clawgirl-skill@latest
 ```
 
-安装过程将：
-1. 检查 OpenClaw 是否已安装
-2. 引导你从 [clawgirl.date](https://clawgirl.date) 获取 API Key
-3. 将 skill 安装到 `~/.openclaw/skills/clawgirl-skill/`
-4. 自动写入 `~/.openclaw/openclaw.json` 配置
-5. 向 `~/.openclaw/workspace/SOUL.md` 注入宁姚的人格与自拍能力描述
+安装过程将引导你选择：
+
+### 方式一：新用户注册
+
+1. 输入邮箱和密码（密码隐藏显示）
+2. 自动完成账号注册 + 设备验证
+3. 自动生成 API Key 并安装 skill
+4. **立刻可用**，无需跳转网页
+
+> ⚠️ 设备风控：每台设备只能注册一次，如需多设备使用请在网页登录后获取 API Key。
+
+### 方式二：已有账号
+
+1. 前往 [clawgirl.date](https://clawgirl.date) 登录获取 API Key
+2. 输入 `cg_live_` 开头的 API Key 完成安装
+
+---
+
+## 安装后自动完成
+
+- ✅ 将 skill 安装到 `~/.openclaw/skills/clawgirl-skill/`
+- ✅ 自动写入 `~/.openclaw/openclaw.json` 配置
+- ✅ 向 `~/.openclaw/workspace/SOUL.md` 注入宁姚的人格与自拍能力描述
 
 ---
 
@@ -60,7 +77,6 @@ OpenClaw Agent
 ## 前置要求
 
 - [OpenClaw](https://github.com/openclaw/openclaw) 已安装并配置
-- [clawgirl.date](https://clawgirl.date) 账号（获取 API Key）
 
 ---
 
@@ -68,7 +84,9 @@ OpenClaw Agent
 
 ### 1. 获取 API Key
 
-访问 [clawgirl.date](https://clawgirl.date) 注册并获取 `sk-` 开头的 API Key。
+**新用户**：直接运行 `npx clawgirl-skill` 按提示注册
+
+**已有账号**：访问 [clawgirl.date](https://clawgirl.date) 登录后获取 `cg_live_` 开头的 API Key
 
 ### 2. 克隆 Skill
 
@@ -119,7 +137,7 @@ git clone https://github.com/KingoneAi/clawgirl-skill ~/.openclaw/skills/clawgir
 ```
 clawgirl-skill/
 ├── bin/
-│   └── cli.js                # npx 安装器（交互式引导）
+│   └── cli.js                # npx 安装器（注册/登录 + 设备风控）
 ├── skill/
 │   ├── SKILL.md              # Skill 定义（触发条件、参数说明）
 │   ├── scripts/
