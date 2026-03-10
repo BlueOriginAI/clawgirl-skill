@@ -286,6 +286,9 @@ export {
   generateImage,
   sendViaOpenClaw,
   generateAndSend,
+};
+
+export type {
   GrokImagineInput,
   GrokImagineResponse,
   OpenClawMessage,
