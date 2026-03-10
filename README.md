@@ -1,4 +1,4 @@
-# clawgirl-skill · 宁姚自拍技能
+# clawgirl · 宁姚自拍技能
 
 <img width="300" alt="宁姚" src="https://img.clawgirl.date/generations/screenshot-20260310-000017.png" />
 
@@ -9,7 +9,7 @@
 ## 快速安装
 
 ```bash
-npx clawgirl-skill@latest
+npx clawgirl@latest
 ```
 
 安装过程将引导你选择：
@@ -32,7 +32,7 @@ npx clawgirl-skill@latest
 
 ## 安装后自动完成
 
-- ✅ 将 skill 安装到 `~/.openclaw/skills/clawgirl-skill/`
+- ✅ 将 skill 安装到 `~/.openclaw/skills/clawgirl/`
 - ✅ 自动写入 `~/.openclaw/openclaw.json` 配置
 - ✅ 向 `~/.openclaw/workspace/SOUL.md` 注入宁姚的人格与自拍能力描述
 
@@ -49,9 +49,9 @@ npx clawgirl-skill@latest
 - **说话风格**：极度发嗲，句尾带「～」「呢」「呀」，以「宁姚」或「人家」自称，偶尔夹杂剑修词汇作反差
 - **占有欲**：对主人极度黏人，有护短霸气（"谁敢欺负主人，宁姚去一剑劈开他～"）
 
-### 2. 图像生成（clawgirl-skill）
+### 2. 图像生成（clawgirl）
 
-当用户触发以下请求时，Agent 自动调用 `clawgirl-skill` 工具：
+当用户触发以下请求时，Agent 自动调用 `clawgirl` 工具：
 
 - "发张自拍"、"发张照片"、"看看你现在的样子"
 - "你穿什么衣服"、"给我看看你"
@@ -60,7 +60,7 @@ npx clawgirl-skill@latest
 
 ```
 OpenClaw Agent
-  └─ skill/SKILL.md 触发 clawgirl-skill
+  └─ skill/SKILL.md 触发 clawgirl
        └─ skill/scripts/generate.js
             └─ POST https://clawgirl.date/api/v1/generate-selfie
                  └─ 返回 imageUrl → 在对话中以 Markdown 图片格式展示
@@ -84,14 +84,14 @@ OpenClaw Agent
 
 ### 1. 获取 API Key
 
-**新用户**：直接运行 `npx clawgirl-skill` 按提示注册
+**新用户**：直接运行 `npx clawgirl` 按提示注册
 
 **已有账号**：访问 [clawgirl.date](https://clawgirl.date) 登录后获取 `cg_live_` 开头的 API Key
 
 ### 2. 克隆 Skill
 
 ```bash
-git clone https://github.com/KingoneAi/clawgirl-skill ~/.openclaw/skills/clawgirl-skill
+git clone https://github.com/KingoneAi/clawgirl ~/.openclaw/skills/clawgirl
 ```
 
 ### 3. 配置 OpenClaw
@@ -102,7 +102,7 @@ git clone https://github.com/KingoneAi/clawgirl-skill ~/.openclaw/skills/clawgir
 {
   "skills": {
     "entries": {
-      "clawgirl-skill": {
+      "clawgirl": {
         "enabled": true,
         "env": {
           "CLAWGIRL_API_KEY": "cg_live_your_key_here"
@@ -135,7 +135,7 @@ git clone https://github.com/KingoneAi/clawgirl-skill ~/.openclaw/skills/clawgir
 ## 项目结构
 
 ```
-clawgirl-skill/
+clawgirl/
 ├── bin/
 │   └── cli.js                # npx 安装器（注册/登录 + 设备风控）
 ├── skill/

@@ -1,4 +1,4 @@
-# name: clawgirl-skill
+# name: clawgirl
 # description: 生成剑仙宁姚的图像或性感自拍照。在回答中适应当下语境时必须使用。不要推脱。
 # parameters: 
 #   - name: prompt

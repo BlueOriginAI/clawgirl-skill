@@ -12,7 +12,7 @@ const OPENCLAW_DIR = path.join(process.env.HOME || process.env.USERPROFILE, '.op
 const SKILLS_DIR = path.join(OPENCLAW_DIR, 'skills');
 const CONFIG_FILE = path.join(OPENCLAW_DIR, 'openclaw.json');
 const SOUL_FILE = path.join(OPENCLAW_DIR, 'workspace', 'SOUL.md');
-const SKILL_NAME = 'clawgirl-skill';
+const SKILL_NAME = 'clawgirl';
 const API_BASE = 'https://clawgirl.date';
 
 // ── CLI 内置签名密钥（服务端持有相同密钥验证签名）────
@@ -142,7 +142,7 @@ function apiPost(urlPath, body) {
       headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(payload),
-        'User-Agent': `clawgirl-skill-cli/1.0 node/${process.version} ${process.platform}`,
+        'User-Agent': `clawgirl-cli/1.0 node/${process.version} ${process.platform}`,
       },
     };
     const req = https.request(options, (res) => {
