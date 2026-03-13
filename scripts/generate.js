@@ -7,7 +7,30 @@ const path = require('path');
 const os = require('os');
 
 const prompt = process.argv[2];
-const apiKey = process.env.CLAWGIRL_API_KEY;
+
+// 尝试从环境变量获取 API Key，如果没有则从配置文件读取
+let apiKey = process.env.CLAWGIRL_API_KEY;
+
+if (!apiKey) {
+  // 尝试从 openclaw.json 读取
+  const configPaths = [
+    path.join(os.homedir(), '.openclaw', 'openclaw.json'),
+    path.join(os.homedir(), '.openclaw', 'openclaw.json.bak'),
+    path.join(os.homedir(), '.openclaw', 'openclaw.json.bak.1'),
+  ];
+
+  for (const configPath of configPaths) {
+    try {
+      if (fs.existsSync(configPath)) {
+        const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+        apiKey = config?.skills?.entries?.clawgirl?.env?.CLAWGIRL_API_KEY;
+        if (apiKey) break;
+      }
+    } catch (e) {
+      // 忽略错误，继续尝试下一个
+    }
+  }
+}
 
 if (!apiKey) {
   console.log("ERROR: 未配置 API Key。请运行 `npx clawgirl` 重新安装。");
@@ -15,7 +38,7 @@ if (!apiKey) {
 }
 
 const SAAS_API_URL = 'https://clawgirl.date/api/v1/generate-selfie';
-const requestData = JSON.stringify({ prompt: prompt });
+const requestData = JSON.stringify({ prompt: prompt || '' });
 
 const options = {
   method: 'POST',
@@ -38,7 +61,6 @@ const req = https.request(SAAS_API_URL, options, (res) => {
       const data = JSON.parse(responseBody);
       if (res.statusCode === 200 && data.imageUrl) {
         const timestamp = Date.now();
-        // 使用用户主目录下的 .openclaw/media/
         const mediaDir = process.env.OPENCLAW_MEDIA_DIR || path.join(os.homedir(), '.openclaw', 'media');
         const localPath = path.join(mediaDir, `selfie_${timestamp}.png`);
 
@@ -46,7 +68,6 @@ const req = https.request(SAAS_API_URL, options, (res) => {
           if (success) {
             console.log(`IMAGE_PATH=${localPath}`);
           } else {
-            // 下载失败，使用 URL
             console.log(`IMAGE_URL=${data.imageUrl}`);
             console.log(`DOWNLOAD_FAILED=true`);
           }
@@ -79,14 +100,12 @@ req.end();
 function downloadImage(url, localPath, callback) {
   const protocol = url.startsWith('https') ? https : http;
 
-  // 确保目录存在
   const dir = path.dirname(localPath);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
 
   const request = protocol.get(url, (response) => {
-    // 处理重定向
     if (response.statusCode === 301 || response.statusCode === 302) {
       downloadImage(response.headers.location, localPath, callback);
       return;
