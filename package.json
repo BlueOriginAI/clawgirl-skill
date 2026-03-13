@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "description": "OpenClaw skill for NingYao persona and image generation via clawgirl.date",
   "bin": {
-    "clawgirl": "./bin/cli.js"
+    "clawgirl": "bin/cli.js"
   },
   "scripts": {
     "start": "node ./bin/cli.js"
