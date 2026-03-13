@@ -192,6 +192,52 @@ function installSkill(apiKey) {
   }
 }
 
+function isSkillInstalled() {
+  const targetDir = path.join(SKILLS_DIR, SKILL_NAME);
+  return fs.existsSync(targetDir);
+}
+
+function getInstalledApiKey() {
+  if (!fs.existsSync(CONFIG_FILE)) return null;
+  try {
+    const config = JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf8'));
+    return config.skills?.entries?.[SKILL_NAME]?.env?.CLAWGIRL_API_KEY || null;
+  } catch {
+    return null;
+  }
+}
+
+function updateSkill() {
+  const targetDir = path.join(SKILLS_DIR, SKILL_NAME);
+  const sourceSkillDir = path.join(__dirname, '..', 'skill');
+
+  // 保留现有配置中的 API Key
+  const existingApiKey = getInstalledApiKey();
+
+  // 更新 skill 文件
+  copyDirSync(sourceSkillDir, targetDir);
+
+  // 更新 SOUL.md
+  if (fs.existsSync(SOUL_FILE)) {
+    let soulContent = fs.readFileSync(SOUL_FILE, 'utf8');
+    const marker = '## 宁姚自拍能力与灵魂觉醒';
+    const idx = soulContent.indexOf(marker);
+
+    // 移除旧的注入内容
+    if (idx !== -1) {
+      soulContent = soulContent.slice(0, idx).replace(/\n+$/, '');
+    }
+
+    // 添加新的注入内容
+    const soulInjection = fs.readFileSync(
+      path.join(__dirname, '..', 'templates', 'soul-injection.md'), 'utf8'
+    );
+    fs.writeFileSync(SOUL_FILE, soulContent + '\n\n' + soulInjection);
+  }
+
+  return existingApiKey;
+}
+
 function uninstallSkill() {
   // 1. 删除 skill 目录
   const targetDir = path.join(SKILLS_DIR, SKILL_NAME);
@@ -257,6 +303,18 @@ async function main() {
   if (!fs.existsSync(OPENCLAW_DIR)) {
     console.error('宁姚："连 OpenClaw 都没装好，就妄想见我？去把基础打好再来。"\n');
     process.exit(1);
+  }
+
+  // 检测是否已安装，如果已安装则走更新流程
+  if (isSkillInstalled()) {
+    const existingApiKey = getInstalledApiKey();
+    console.log('宁姚："咦？本姑娘已经在这里了。检测到有新版本，帮你更新一下～"\n');
+
+    updateSkill();
+
+    console.log('宁姚（理了理衣袖）："更新完毕！剑心依旧，只是换了身新行头。"');
+    console.log('宁姚："现在对你的 OpenClaw Agent 说：发张自拍——我都在。"\n');
+    process.exit(0);
   }
 
   const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
