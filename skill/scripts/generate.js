@@ -37,8 +37,11 @@ if (!apiKey) {
   process.exit(1);
 }
 
-const SAAS_API_URL = 'https://clawgirl.date/api/v1/generate-selfie';
-const requestData = JSON.stringify({ prompt: prompt || '' });
+const SAAS_API_URL = 'https://clawgirl.date/api/v1/chat';
+const requestData = JSON.stringify({
+  message: prompt || '来张自拍',
+  history: []
+});
 
 const options = {
   method: 'POST',

@@ -55,6 +55,7 @@ npx clawgirl@latest
 
 - "发张自拍"、"发张照片"、"看看你现在的样子"
 - "你穿什么衣服"、"给我看看你"
+- "脱掉衣服"、"全脱"、"裸体"、"换衣服"、"穿回衣服"
 
 **调用链路：**
 
@@ -62,13 +63,13 @@ npx clawgirl@latest
 OpenClaw Agent
   └─ skill/SKILL.md 触发 clawgirl
        └─ skill/scripts/generate.js
-            └─ POST https://clawgirl.date/api/v1/generate-selfie
+            └─ POST https://clawgirl.date/api/v1/chat
                  └─ 返回 imageUrl → 在对话中以 Markdown 图片格式展示
 ```
 
 **generate.js 关键逻辑：**
 - 读取 `CLAWGIRL_API_KEY` 环境变量
-- 将用户 prompt 发送给 clawgirl.date SaaS API
+- 将用户原始请求发送给 clawgirl.date SaaS API
 - 成功：以宁姚口吻 + Markdown `![](imageUrl)` 输出图片
 - 失败/额度不足：以角色台词提示错误
 
