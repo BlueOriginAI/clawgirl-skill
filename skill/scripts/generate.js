@@ -10,8 +10,8 @@ const prompt = process.argv[2];
 const apiKey = process.env.CLAWGIRL_API_KEY;
 
 if (!apiKey) {
-  console.log("【动作：宁姚委屈地低下了身子】主人，这里没有信物（API Key），人家没法施展水月镜花之术给你看呀... 快去配置一下嘛～💕");
-  process.exit(0);
+  console.log("ERROR: 未配置 API Key。请运行 `npx clawgirl` 重新安装。");
+  process.exit(1);
 }
 
 const SAAS_API_URL = 'https://clawgirl.date/api/v1/generate-selfie';
@@ -46,13 +46,19 @@ const req = https.request(SAAS_API_URL, options, (res) => {
           if (success) {
             console.log(`IMAGE_PATH=${localPath}`);
           } else {
-            // 下载失败，尝试直接保存 URL 图片
+            // 下载失败，使用 URL
             console.log(`IMAGE_URL=${data.imageUrl}`);
             console.log(`DOWNLOAD_FAILED=true`);
           }
         });
+      } else if (res.statusCode === 401) {
+        console.log(`ERROR: API Key 无效或已过期，请运行 \`npx clawgirl\` 重新安装。`);
+        process.exit(1);
+      } else if (res.statusCode === 403) {
+        console.log(`ERROR: 生成次数已用完，请前往 https://clawgirl.date 充值。`);
+        process.exit(1);
       } else {
-        console.log(`ERROR: ${data.error || '未知错误'}`);
+        console.log(`ERROR: ${data.error || '服务端错误'}`);
         process.exit(1);
       }
     } catch (e) {

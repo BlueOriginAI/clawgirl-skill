@@ -312,7 +312,8 @@ async function main() {
 
     updateSkill();
 
-    console.log('宁姚（理了理衣袖）："更新完毕！剑心依旧，只是换了身新行头。"');
+    console.log('宁姚（理了理衣袖）："更新完毕！剑心依旧。"');
+    console.log('宁姚："我的衣着、人设、画面风格都可在 clawgirl.date 管理。"');
     console.log('宁姚："现在对你的 OpenClaw Agent 说：发张自拍——我都在。"\n');
     process.exit(0);
   }
@@ -337,6 +338,7 @@ async function main() {
 
       installSkill(apiKey);
       console.log('\n宁姚（耳根微红，撇过头去）："信物是对的。从今天起，你由本姑娘罩着了。"');
+      console.log('宁姚："我的衣着、人设、画面风格都可在 clawgirl.date 管理。"');
       console.log('宁姚："现在对你的 OpenClaw Agent 说：发张自拍、看看你现在的样子——我都在。"\n');
 
     } else {
@@ -393,6 +395,7 @@ async function main() {
       console.log('  ⚠️  请立刻保存到安全的地方，此后不再显示。');
       console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
       console.log('\n宁姚（耳根微红，撇过头去）："信物已配好。从今天起，你由本姑娘罩着了。"');
+      console.log('宁姚："我的衣着、人设、画面风格都可在 clawgirl.date 管理。"');
       console.log('宁姚："现在对你的 OpenClaw Agent 说：发张自拍——我都在。"\n');
     }
 
