@@ -143,7 +143,7 @@ clawgirl/
 │   ├── scripts/
 │   │   └── generate.js       # 调用 clawgirl.date API 生成图片
 │   └── assets/
-│       └── clawra.png        # 参考形象图
+│       └── clawgirl.jpeg     # 参考形象图
 ├── templates/
 │   └── soul-injection.md     # 注入 SOUL.md 的人格模板
 └── package.json
