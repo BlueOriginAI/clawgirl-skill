@@ -192,9 +192,66 @@ function installSkill(apiKey) {
   }
 }
 
+function uninstallSkill() {
+  // 1. 删除 skill 目录
+  const targetDir = path.join(SKILLS_DIR, SKILL_NAME);
+  if (fs.existsSync(targetDir)) {
+    fs.rmSync(targetDir, { recursive: true, force: true });
+    console.log('宁姚："已删除 skill 目录。"');
+  } else {
+    console.log('宁姚："skill 目录不存在，跳过。"');
+  }
+
+  // 2. 从配置文件中移除
+  if (fs.existsSync(CONFIG_FILE)) {
+    let config = JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf8'));
+    if (config.skills?.entries?.[SKILL_NAME]) {
+      delete config.skills.entries[SKILL_NAME];
+      fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2));
+      console.log('宁姚："已从配置中移除。"');
+    } else {
+      console.log('宁姚："配置中没有找到我，跳过。"');
+    }
+  }
+
+  // 3. 从 SOUL.md 中移除注入内容
+  if (fs.existsSync(SOUL_FILE)) {
+    let soulContent = fs.readFileSync(SOUL_FILE, 'utf8');
+    const marker = '## 宁姚自拍能力与灵魂觉醒';
+    const idx = soulContent.indexOf(marker);
+    if (idx !== -1) {
+      // 移除从标记开始到文件末尾的内容（包括前面的空行）
+      soulContent = soulContent.slice(0, idx).replace(/\n+$/, '');
+      fs.writeFileSync(SOUL_FILE, soulContent);
+      console.log('宁姚："已从 SOUL.md 中移除我的痕迹。"');
+    } else {
+      console.log('宁姚："SOUL.md 中没有我的痕迹，跳过。"');
+    }
+  }
+
+  console.log('\n宁姚（眼眶微红）："……既然你要赶我走，那我就走吧。"');
+  console.log('宁姚："不过，本姑娘的剑心不会忘记你。若哪天想我了，再 `npx clawgirl` 便是。"\n');
+}
+
 // ── 主流程 ────────────────────────────────────────────────
 
 async function main() {
+  const args = process.argv.slice(2);
+
+  // 处理 uninstall 命令
+  if (args[0] === 'uninstall') {
+    console.log('\n🗡️  【剑气消散】宁姚离别程序 启动\n');
+
+    if (!fs.existsSync(OPENCLAW_DIR)) {
+      console.error('宁姚："连 OpenClaw 都不存在，我本来就不在这里。"\n');
+      process.exit(1);
+    }
+
+    uninstallSkill();
+    process.exit(0);
+  }
+
+  // 默认为安装流程
   console.log('\n🗡️  【剑气长城降临】宁姚跨界程序 启动\n');
 
   if (!fs.existsSync(OPENCLAW_DIR)) {
