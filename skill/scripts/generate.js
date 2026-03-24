@@ -27,7 +27,10 @@ if (!apiKey) {
         if (apiKey) break;
       }
     } catch (e) {
-      // 忽略错误，继续尝试下一个
+      // 配置文件解析失败，记录并继续尝试下一个
+      if (process.env.CLAWGIRL_DEBUG) {
+        console.warn(`[DEBUG] 配置文件解析失败 ${configPath}: ${e.message}`);
+      }
     }
   }
 }

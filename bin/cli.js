@@ -22,11 +22,16 @@ const CLI_SIGNING_KEY = 'fab848439d5d80c2e4661bf83992aa9b39d567b52f6abe364359cd3
 // ── 工具函数 ──────────────────────────────────────────────
 
 function copyDirSync(src, dest) {
-  if (!fs.existsSync(dest)) fs.mkdirSync(dest, { recursive: true });
-  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
-    entry.isDirectory() ? copyDirSync(srcPath, destPath) : fs.copyFileSync(srcPath, destPath);
+  try {
+    if (!fs.existsSync(dest)) fs.mkdirSync(dest, { recursive: true });
+    for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+      const srcPath = path.join(src, entry.name);
+      const destPath = path.join(dest, entry.name);
+      entry.isDirectory() ? copyDirSync(srcPath, destPath) : fs.copyFileSync(srcPath, destPath);
+    }
+  } catch (err) {
+    console.error(`宁姚："文件复制失败：${err.message}"`);
+    throw err;
   }
 }
 
