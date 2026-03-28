@@ -133,6 +133,15 @@ test('下载失败输出格式应包含 DOWNLOAD_FAILED', () => {
   assert(output.includes('IMAGE_URL='), '失败输出应包含 IMAGE_URL');
 });
 
+test('文本透传输出应使用 TEXT_RESPONSE_BASE64', () => {
+  const text = '主人，宁姚这会儿正看着你呢～';
+  const encoded = Buffer.from(text, 'utf8').toString('base64');
+  const output = `TEXT_RESPONSE_BASE64=${encoded}`;
+
+  assert(output.startsWith('TEXT_RESPONSE_BASE64='), '文本输出应以 TEXT_RESPONSE_BASE64= 开头');
+  assert.strictEqual(Buffer.from(encoded, 'base64').toString('utf8'), text, 'base64 内容应可还原为原文');
+});
+
 // ============================================
 // 测试 8: 错误消息格式
 // ============================================

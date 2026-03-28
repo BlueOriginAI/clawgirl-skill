@@ -42,6 +42,11 @@ IMAGE_URL=https://img.clawgirl.date/generations/xxx.png
 DOWNLOAD_FAILED=true
 ```
 
+未命中生图、需要直接回复文本时：
+```
+TEXT_RESPONSE_BASE64=5Li76LqL77yM5L2g55qE6Ieq5ouN5ouN5aW95LqG772e
+```
+
 **第三步：发送图片**
 
 使用 message 工具发送图片：
@@ -49,11 +54,17 @@ DOWNLOAD_FAILED=true
 action: send
 channel: <当前对话的 channel>
 media: <IMAGE_PATH 的值>
-message: 主人，你的自拍拍好啦～宁姚我的衣着、人设可以在 clawgirl.date 网站统一管理。
+message: 主人，你的自拍拍好啦～想调整 API Key 或默认画面风格的话，可以回 clawgirl.date 看看。
 ```
+
+如果拿到 `TEXT_RESPONSE_BASE64`：
+1. 将 base64 解码为 UTF-8 文本
+2. 直接把该文本回复给用户
+3. 不要把这种情况当成错误，也不要强行发送图片
 
 ## 注意事项
 
 1. 优先使用 `IMAGE_PATH` 作为 media 参数
 2. 如果 `DOWNLOAD_FAILED=true`，使用 `IMAGE_URL` 作为备选
-3. 不要先用普通聊天回复替代技能执行；命中触发条件时，优先执行技能
+3. 如果返回 `TEXT_RESPONSE_BASE64`，说明 SaaS 判定本轮不需要生图，应原样回复接口文本
+4. 不要先用普通聊天回复替代技能执行；命中触发条件时，优先执行技能

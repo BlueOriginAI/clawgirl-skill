@@ -40,6 +40,10 @@ if (!apiKey) {
   process.exit(1);
 }
 
+function encodeTextResponse(text) {
+  return Buffer.from(String(text), 'utf8').toString('base64');
+}
+
 const SAAS_API_URL = 'https://clawgirl.date/api/v1/chat';
 const requestData = JSON.stringify({
   message: prompt || '来张自拍',
@@ -78,8 +82,15 @@ const req = https.request(SAAS_API_URL, options, (res) => {
             console.log(`DOWNLOAD_FAILED=true`);
           }
         });
+      } else if (
+        res.statusCode === 200 &&
+        data.shouldGenerateImage === false &&
+        typeof data.response === 'string' &&
+        data.response.trim()
+      ) {
+        console.log(`TEXT_RESPONSE_BASE64=${encodeTextResponse(data.response.trim())}`);
       } else if (res.statusCode === 401) {
-        console.log(`ERROR: API Key 无效或已过期，请运行 \`npx clawgirl\` 重新安装。`);
+        console.log('ERROR: API Key 无效或已过期。请前往 https://clawgirl.date 重新生成 API Key，并更新 ~/.openclaw/openclaw.json 中 clawgirl.env.CLAWGIRL_API_KEY，或重新运行 `npx clawgirl` 输入新 key。');
         process.exit(1);
       } else if (res.statusCode === 403) {
         console.log(`ERROR: 生成次数已用完，请前往 https://clawgirl.date 充值。`);
