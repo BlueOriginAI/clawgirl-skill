@@ -1,6 +1,6 @@
 {
   "name": "clawgirl",
-  "version": "0.0.12",
+  "version": "0.0.19",
   "description": "OpenClaw skill for NingYao persona and image generation via clawgirl.date",
   "bin": {
     "clawgirl": "bin/cli.js"
