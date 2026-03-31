@@ -2,28 +2,27 @@
 
 <img width="300" alt="宁姚" src="https://img.clawgirl.date/generations/screenshot-20260310-000017.png" />
 
-为 [OpenClaw](https://github.com/openclaw/openclaw) Agent 注入「宁姚」剑仙人格，并通过 [clawgirl.date](https://clawgirl.date) SaaS API 实现图像生成自拍能力。
+为 [OpenClaw](https://github.com/openclaw/openclaw) Agent 注入「宁姚」剑仙人格，并通过 [clawgirl.date](https://clawgirl.date) API 实现图像生成自拍能力。
 
 ---
 
 ## 快速安装
 
 ```bash
-npx clawgirl@latest
+clawhub install clawgirl-selfie
 ```
 
 安装过程如下：
 
-1. 前往 [clawgirl.date](https://clawgirl.date) 登录
-2. 在网站内生成 `cg_live_` 开头的 API Key
-3. 运行 `npx clawgirl@latest`
-4. 输入 API Key 完成安装
+1. 通过 ClawHub 将 skill 添加到 OpenClaw
+2. 按当前宿主环境提示完成配置
+3. 完成后即可在对话中直接调用
 
-如果你已经安装过 skill，但后来在网站里重新生成了 API Key：
+如果你已经安装过 skill，需要更新本地配置：
 
-1. 再次运行 `npx clawgirl@latest`
-2. 按提示粘贴新的 `cg_live_` API Key
-3. 安装器会保留 skill 文件并更新本地配置中的密钥
+1. 重新同步 ClawHub 中的 skill 配置
+2. 或手动更新本地 `CLAWGIRL_API_KEY`
+3. 保持宿主环境里的密钥与最新配置一致
 
 ---
 
@@ -67,7 +66,7 @@ OpenClaw Agent
 
 **generate.js 关键逻辑：**
 - 读取 `CLAWGIRL_API_KEY` 环境变量
-- 将用户原始请求发送给 clawgirl.date SaaS API
+- 将用户原始请求发送给 ClawGirl API
 - 命中生图：输出 `IMAGE_PATH=...`，下载失败时降级为 `IMAGE_URL=...`
 - 未命中生图：输出 `TEXT_RESPONSE_BASE64=...`，由 OpenClaw 原样回复接口文本
 - 失败/额度不足：以角色台词提示错误
@@ -82,11 +81,9 @@ OpenClaw Agent
 
 ## 手动安装
 
-### 1. 获取 API Key
+### 1. 准备配置
 
-访问 [clawgirl.date](https://clawgirl.date) 登录后获取 `cg_live_` 开头的 API Key
-
-如果已安装过 skill 且只是更换 API Key，也可以直接重新运行 `npx clawgirl@latest`，按提示覆盖本地配置。
+准备可用的 `CLAWGIRL_API_KEY`
 
 ### 2. 克隆 Skill
 
@@ -137,11 +134,11 @@ git clone https://github.com/KingoneAi/clawgirl ~/.openclaw/skills/clawgirl
 ```
 clawgirl/
 ├── bin/
-│   └── cli.js                # npx 安装器（提示登录网站并输入 API Key）
+│   └── cli.js                # CLI 安装器（保留兼容入口）
 ├── skill/
 │   ├── SKILL.md              # Skill 定义（触发条件、参数说明）
 │   ├── scripts/
-│   │   └── generate.js       # 调用 clawgirl.date API，返回图片或文本响应
+│   │   └── generate.js       # 调用 ClawGirl API，返回图片或文本响应
 │   └── assets/
 │       └── clawgirl.jpeg     # 参考形象图
 ├── templates/

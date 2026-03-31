@@ -5,12 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.0.20] - 2026-03-31
 
 ### Changed
-- Align installer and README with the website-first API Key flow
-- Allow re-running `npx clawgirl` to replace an existing local API Key
-- Clarify that website settings manage API Key and default image style
+- Prefer ClawHub-based installation guidance in public docs and storefront copy
+- Remove public-facing `npx` installation guidance from README and SKILL metadata
+- Update public wording to use ClawGirl API / integration language instead of hosted-service marketing phrasing
 
 ### Fixed
 - Treat `/api/v1/chat` text-only responses as normal skill output instead of errors
@@ -93,7 +93,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Clawgirl skill for OpenClaw integration
 - Integration with clawgirl.date API
 - Selfie generation capability
-- CLI installer (`npx clawgirl`)
+- CLI installer
 
 [0.0.11]: https://github.com/BlueOriginAI/clawgirl-skill/compare/v0.0.10...v0.0.11
 [0.0.10]: https://github.com/BlueOriginAI/clawgirl-skill/compare/v0.0.9...v0.0.10
