@@ -1,5 +1,5 @@
 {
-  "name": "clawra-selfie",
+  "name": "@blueorigin-ai/clawra-selfie",
   "version": "0.0.22",
   "description": "OpenClaw skill for AI girlfriend selfie generation with Clawra-style simplified prompts",
   "bin": {
@@ -14,5 +14,8 @@
     "templates/",
     "README.md"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {}
 }
