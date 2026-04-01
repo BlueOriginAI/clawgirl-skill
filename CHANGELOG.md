@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.24] - 2026-04-01
+
+### Changed
+- 增强 SOUL 注入内容：添加自拍模式说明（Mirror/Direct）
+- 借鉴 Clawra 风格，让 AI Agent 更好理解自拍能力
+- 添加触发关键词表和示例说明
+- 补充技术实现细节
+
 ## [0.0.23] - 2026-04-01
 
 ### Changed
