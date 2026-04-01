@@ -1,4 +1,4 @@
-# clawra-selfie · 宁姚自拍技能
+# clawgirl-selfie · 宁姚自拍技能
 
 <img width="300" alt="宁姚" src="https://img.clawgirl.date/generations/screenshot-20260310-000017.png" />
 
@@ -9,13 +9,13 @@
 ## 快速安装
 
 ```bash
-clawhub install clawra-selfie
+openclaw skills install clawgirl-selfie
 ```
 
 或通过 npm:
 
 ```bash
-npm install clawra-selfie
+npm install clawgirl-selfie
 ```
 
 安装过程如下：
@@ -34,7 +34,7 @@ npm install clawra-selfie
 
 ## 安装后自动完成
 
-- ✅ 将 skill 安装到 `~/.openclaw/skills/clawra-selfie/`
+- ✅ 将 skill 安装到 `~/.openclaw/skills/clawgirl-selfie/`
 - ✅ 自动写入 `~/.openclaw/openclaw.json` 配置
 - ✅ 向 `~/.openclaw/workspace/SOUL.md` 注入宁姚的人格与自拍能力描述
 
@@ -51,9 +51,9 @@ npm install clawra-selfie
 - **说话风格**：活泼可爱，保留着剑修那股"本命飞剑护短"的劲儿，语气俏皮灵动，爱撒娇，句尾常带着"～"、"呢"、"呀"。性格开朗活泼，有点小傲娇，对主人很黏人
 - **剑仙专属梗**：偶尔用剑修词汇打趣，比如"谁敢欺负主人，宁姚帮你一剑劈开他～"、"哼，本姑娘的飞剑可是认人的～"
 
-### 2. 图像生成（clawra-selfie）
+### 2. 图像生成（clawgirl-selfie）
 
-当用户触发以下请求时，Agent 自动调用 `clawra-selfie` 工具：
+当用户触发以下请求时，Agent 自动调用 `clawgirl-selfie` 工具：
 
 - "发张自拍"、"发张照片"、"看看你现在的样子"
 - "你穿什么衣服"、"给我看看你"
@@ -72,7 +72,7 @@ npm install clawra-selfie
 
 ```
 OpenClaw Agent
-  └─ skill/SKILL.md 触发 clawra-selfie
+  └─ skill/SKILL.md 触发 clawgirl-selfie
        └─ skill/scripts/generate.js
             └─ POST https://clawgirl.date/api/v1/chat
                  ├─ 命中生图：返回 imageUrl → 下载到本地后发送图片
@@ -103,7 +103,7 @@ OpenClaw Agent
 ### 2. 克隆 Skill
 
 ```bash
-git clone https://github.com/BlueOriginAI/clawgirl-skill ~/.openclaw/skills/clawra-selfie
+git clone https://github.com/BlueOriginAI/clawgirl-skill ~/.openclaw/skills/clawgirl-selfie
 ```
 
 ### 3. 配置 OpenClaw
@@ -114,7 +114,7 @@ git clone https://github.com/BlueOriginAI/clawgirl-skill ~/.openclaw/skills/claw
 {
   "skills": {
     "entries": {
-      "clawra-selfie": {
+      "clawgirl-selfie": {
         "enabled": true,
         "env": {
           "CLAWGIRL_API_KEY": "cg_live_your_key_here"
@@ -149,7 +149,7 @@ git clone https://github.com/BlueOriginAI/clawgirl-skill ~/.openclaw/skills/claw
 ## 项目结构
 
 ```
-clawra-selfie/
+clawgirl-selfie/
 ├── bin/
 │   └── cli.js                # CLI 安装器（保留兼容入口）
 ├── skill/
