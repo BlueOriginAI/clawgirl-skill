@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.21] - 2026-04-01
+
+### Changed
+- SaaS backend now uses simplified prompt templates (Clawra-style) for better instruction following
+- User instructions now occupy >50% of total prompt length
+- Smart mode detection: Mirror mode for outfits, Direct mode for scenes
+- Added English keyword support for mode detection (wearing, cafe, beach, etc.)
+
+### Fixed
+- Fixed duplicate "自拍" word in Direct mode prompts
+- Fixed English inputs not triggering simplified mode
+
 ## [0.0.20] - 2026-03-31
 
 ### Changed
