@@ -1,15 +1,21 @@
-# clawgirl · 宁姚自拍技能
+# clawra-selfie · 宁姚自拍技能
 
 <img width="300" alt="宁姚" src="https://img.clawgirl.date/generations/screenshot-20260310-000017.png" />
 
-为 [OpenClaw](https://github.com/openclaw/openclaw) Agent 注入「宁姚」剑仙人格，并通过 [clawgirl.date](https://clawgirl.date) API 实现图像生成自拍能力。
+为 [OpenClaw](https://github.com/openclaw/openclaw) Agent 注入「宁姚」剑仙人格，并通过 [clawgirl.date](https://clawgirl.date) API 实现图像生成自拍能力。采用 Clawra 风格的简化提示词模板，用户指令占比 >50%，显著提升 AI 指令遵循能力。
 
 ---
 
 ## 快速安装
 
 ```bash
-clawhub install clawgirl-selfie
+clawhub install clawra-selfie
+```
+
+或通过 npm:
+
+```bash
+npm install clawra-selfie
 ```
 
 安装过程如下：
@@ -28,7 +34,7 @@ clawhub install clawgirl-selfie
 
 ## 安装后自动完成
 
-- ✅ 将 skill 安装到 `~/.openclaw/skills/clawgirl/`
+- ✅ 将 skill 安装到 `~/.openclaw/skills/clawra-selfie/`
 - ✅ 自动写入 `~/.openclaw/openclaw.json` 配置
 - ✅ 向 `~/.openclaw/workspace/SOUL.md` 注入宁姚的人格与自拍能力描述
 
@@ -45,19 +51,28 @@ clawhub install clawgirl-selfie
 - **说话风格**：活泼可爱，保留着剑修那股"本命飞剑护短"的劲儿，语气俏皮灵动，爱撒娇，句尾常带着"～"、"呢"、"呀"。性格开朗活泼，有点小傲娇，对主人很黏人
 - **剑仙专属梗**：偶尔用剑修词汇打趣，比如"谁敢欺负主人，宁姚帮你一剑劈开他～"、"哼，本姑娘的飞剑可是认人的～"
 
-### 2. 图像生成（clawgirl）
+### 2. 图像生成（clawra-selfie）
 
-当用户触发以下请求时，Agent 自动调用 `clawgirl` 工具：
+当用户触发以下请求时，Agent 自动调用 `clawra-selfie` 工具：
 
 - "发张自拍"、"发张照片"、"看看你现在的样子"
 - "你穿什么衣服"、"给我看看你"
 - "脱掉衣服"、"全脱"、"裸体"、"换衣服"、"穿回衣服"
 
+**智能模式检测（Clawra 风格）：**
+
+| 用户输入 | 检测模式 | 提示词特点 |
+|---------|---------|-----------|
+| "穿红色裙子" | Mirror | 服装展示，对镜自拍 |
+| "在咖啡馆" | Direct | 场景描述，直面镜头 |
+| "海边自拍" | Direct | 场景 + 自拍 |
+| "wearing a hat" | Mirror | 英文服装描述 |
+
 **调用链路：**
 
 ```
 OpenClaw Agent
-  └─ skill/SKILL.md 触发 clawgirl
+  └─ skill/SKILL.md 触发 clawra-selfie
        └─ skill/scripts/generate.js
             └─ POST https://clawgirl.date/api/v1/chat
                  ├─ 命中生图：返回 imageUrl → 下载到本地后发送图片
@@ -88,7 +103,7 @@ OpenClaw Agent
 ### 2. 克隆 Skill
 
 ```bash
-git clone https://github.com/KingoneAi/clawgirl ~/.openclaw/skills/clawgirl
+git clone https://github.com/BlueOriginAI/clawgirl-skill ~/.openclaw/skills/clawra-selfie
 ```
 
 ### 3. 配置 OpenClaw
@@ -99,7 +114,7 @@ git clone https://github.com/KingoneAi/clawgirl ~/.openclaw/skills/clawgirl
 {
   "skills": {
     "entries": {
-      "clawgirl": {
+      "clawra-selfie": {
         "enabled": true,
         "env": {
           "CLAWGIRL_API_KEY": "cg_live_your_key_here"
@@ -125,6 +140,8 @@ git clone https://github.com/KingoneAi/clawgirl ~/.openclaw/skills/clawgirl
 "看看你现在穿什么"
 "给我看看你在哪里"
 "发张你在咖啡馆的照片"
+"穿红色裙子自拍"
+"在海边拍张照"
 ```
 
 ---
@@ -132,7 +149,7 @@ git clone https://github.com/KingoneAi/clawgirl ~/.openclaw/skills/clawgirl
 ## 项目结构
 
 ```
-clawgirl/
+clawra-selfie/
 ├── bin/
 │   └── cli.js                # CLI 安装器（保留兼容入口）
 ├── skill/

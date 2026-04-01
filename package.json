@@ -1,9 +1,9 @@
 {
-  "name": "clawgirl",
-  "version": "0.0.21",
-  "description": "OpenClaw skill for NingYao persona and selfie image generation",
+  "name": "clawra-selfie",
+  "version": "0.0.22",
+  "description": "OpenClaw skill for AI girlfriend selfie generation with Clawra-style simplified prompts",
   "bin": {
-    "clawgirl": "bin/cli.js"
+    "clawra-selfie": "bin/cli.js"
   },
   "scripts": {
     "start": "node ./bin/cli.js"
